@@ -1,5 +1,5 @@
 ## Description ##
-This is a demo node.js server to handle requests regarding stores and employees.
+This is a demo node.js server handling requests related toread stores and employees.
 
 ## Installation ##
 TODO insert git clone command
