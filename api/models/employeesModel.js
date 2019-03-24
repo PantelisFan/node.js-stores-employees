@@ -27,7 +27,11 @@ var EmployeesSchema = new Schema({
     type: String,
     default: Date.now
   },
-  storeId : String
+  storeId : {
+    type: String,
+    required: 'Please enter the store Id the employee belongs to.'
+
+  }
 
 });
 

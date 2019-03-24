@@ -5,8 +5,10 @@ var mongoose = require('mongoose'),
 
 //       /employees REQUESTS
 
-exports.list_all = function(req, res) {
-  Employees.find({"storeId":req.params.storeId},function(err, list) {
+exports.list_all = function (req, res) {
+  let filter = {};
+  if (req.params.hasOwnProperty('storeId')) filter['storeId'] = req.params.storeId
+  Employees.find(filter, function (err, list) {
     if (!err) {
       res.send(list);
     } else {
@@ -16,8 +18,8 @@ exports.list_all = function(req, res) {
 }
 
 
-exports.delete_all = function(req, res) {
-  Employees.deleteMany({}, function(err, list) {
+exports.delete_all = function (req, res) {
+  Employees.deleteMany({}, function (err, list) {
     if (!err) {
       res.send(list);
     } else {
@@ -26,7 +28,7 @@ exports.delete_all = function(req, res) {
   });
 };
 
-exports.create_new = function(req, res) {
+exports.create_new = function (req, res) {
 
   const newEmployee = new Employees({
     name: req.body.name,
@@ -35,6 +37,7 @@ exports.create_new = function(req, res) {
     dateOfEmployment: req.body.dateOfEmployment,
     storeId: req.body.storeId
   });
+  // todo return value only on success @save
   newEmployee.save();
   res.send(newEmployee);
 };
@@ -43,11 +46,11 @@ exports.create_new = function(req, res) {
 
 
 
-exports.update_one = function(req, res) {
-
-  newEmployee = Employees.update({
-      name: req.params.employeeId
-    }, {
+exports.update_one = function (req, res) {
+  // todo same as stores update
+  Employees.update({
+    _id: req.params.employeeID
+  }, {
       name: req.body.name,
       age: req.body.age,
       gender: req.body.salary,
@@ -55,7 +58,7 @@ exports.update_one = function(req, res) {
     }, {
       overwrite: true
     },
-    function(err) {
+    function (err, newEmploye) {
       if (!err) {
         res.send(newEmploye);
       } else {
@@ -67,13 +70,13 @@ exports.update_one = function(req, res) {
 
 };
 
-exports.patch_one = function(req, res) {
-  newEmployee = Employees.update({
-      name: req.params.employeeId
-    }, {
+exports.patch_one = function (req, res) {
+  Employees.update({
+    _id: req.params.employeeID
+  }, {
       $set: req.body
     },
-    function(err) {
+    function (err, newEmployee) {
       if (!err) {
         res.send(newEmployee);
       } else {
@@ -84,11 +87,11 @@ exports.patch_one = function(req, res) {
   );
 };
 
-exports.delete_one = function(req, res) {
-  newEmployee = Employees.deleteOne({
-      name: req.params.employeeId
-    },
-    function(err) {
+exports.delete_one = function (req, res) {
+  Employees.deleteOne({
+    _id: req.params.employeeID
+  },
+    function (err, newEmployee) {
       if (!err) {
         res.send(newEmployee)
       } else {

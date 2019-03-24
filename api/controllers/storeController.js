@@ -5,8 +5,8 @@ var mongoose = require('mongoose'),
 
 //       /Stores REQUESTS
 
-exports.list_all = function(req, res) {
-  Stores.find(function(err, list) {
+exports.list_all = function (req, res) {
+  Stores.find(function (err, list) {
     if (!err) {
       res.send(list);
     } else {
@@ -15,8 +15,8 @@ exports.list_all = function(req, res) {
   });
 };
 
-exports.delete_all = function(req, res) {
-  Stores.deleteMany({}, function(err, list) {
+exports.delete_all = function (req, res) {
+  Stores.deleteMany({}, function (err, list) {
     if (!err) {
       res.send(list);
     } else {
@@ -25,12 +25,13 @@ exports.delete_all = function(req, res) {
   });
 };
 
-exports.create_new = function(req, res) {
+exports.create_new = function (req, res) {
 
   const newStore = new Stores({
     name: req.body.name,
     budget: req.body.budget
   });
+  // todo return value only on success @save
   newStore.save();
   res.send(newStore);
 };
@@ -39,35 +40,59 @@ exports.create_new = function(req, res) {
 
 
 
-exports.update_one = function(req, res) {
+exports.update_one = function (req, res) {
+  // TODO 
 
-  newStore = Stores.update({
-      _id: req.params.storeId
-    }, {
-      name: req.body.name,
-      budget: req.body.budget
-    }, {
-      overwrite: true
-    },
-    function(err) {
-      if (!err) {
-        res.send(newStore);
-      } else {
-        console.log(err);
-        res.send(err);
-      }
+  // 2. foreach field of the document check if it exists
+  //   in request body, if so overwrite it
+  // 3. save the document.
+  Stores.findOne({
+    _id: req.params.storeId
+  }, function (err, store) {
+    if (!err) {
+      if (req.body.hasOwnProperty('name')) store.name = req.body.name;
+      if (req.body.hasOwnProperty('budget')) store.budget = req.body.budget;
+      store.save(function (err, data) {
+        if (!err) {
+          res.send(store);
+        }
+        else {
+          res.send(err);
+        }
+      })
+      // res.send(list);
+    } else {
+      res.send(err);
     }
-  );
+  });
+
+  // Stores.update({
+  //   _id: req.params.storeId
+  // }, {
+  //     name:,
+  //     budget: req.body.budget
+  //   }, {
+  //     overwrite: true
+  //   },
+  //   function (err, newStore) {
+  //     if (!err) {
+  //       res.send(newStore);
+  //     } else {
+  //       console.log(err);
+  //       res.send(err);
+  //     }
+  //   }
+  // );
 
 };
 
-exports.patch_one = function(req, res) {
-  newStore = Stores.update({
-      _id: req.params.storeId
-    }, {
+exports.patch_one = function (req, res) {
+  Stores.update({
+    _id: req.params.storeId
+  }, {
       $set: req.body
     },
-    function(err) {
+    function (err, newStore) {
       if (!err) {
         res.send(newStore);
       } else {
@@ -78,11 +103,11 @@ exports.patch_one = function(req, res) {
   );
 };
 
-exports.delete_one = function(req, res) {
-  newStore = Stores.deleteOne({
-      _id: req.params.storeId
-    },
-    function(err) {
+exports.delete_one = function (req, res) {
+  Stores.deleteOne({
+    _id: req.params.storeId
+  },
+    function (err, newStore) {
       if (!err) {
         res.send(newStore)
       } else {
@@ -93,10 +118,10 @@ exports.delete_one = function(req, res) {
   );
 };
 
-exports.find_one = function(req, res) {
-  newStore = Stores.findOne({
+exports.find_one = function (req, res) {
+  Stores.findOne({
     _id: req.params.storeId
-  }, function(err,data) {
+  }, function (err, data) {
     if (!err) {
       res.send(data);
     } else {
