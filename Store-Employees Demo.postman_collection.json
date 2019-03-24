@@ -1,0 +1,300 @@
+{
+	"info": {
+		"_postman_id": "f5dafd6b-0850-4092-aba9-d877d7c20a82",
+		"name": "Store-Employees Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "stores",
+			"item": [
+				{
+					"name": "Create store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "budget",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Carpo",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:3000/stores",
+						"description": "Get store list"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve all stores",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:3000/stores",
+						"description": "Get store list"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve single store",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:3000/stores/{{storeId}}",
+						"description": "Get store by _id"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Store",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "budget",
+									"value": "500",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Carpo 2",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:3000/stores/{{storeId}}",
+						"description": "Get store by _id"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Store Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:3000/stores/{{storeId}}",
+						"description": "Get store by _id"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Store Employees",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:3000/stores",
+						"description": "Get store list"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "employees",
+			"item": [
+				{
+					"name": "Get all employees",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "MariaMaria\n",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "age",
+									"value": "23",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "salary",
+									"value": "35000",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "dateOfEmployment",
+									"value": "2/1/2015",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": "http://localhost:3000/employees"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Pantelis",
+									"type": "text"
+								},
+								{
+									"key": "salary",
+									"value": "35000",
+									"type": "text"
+								},
+								{
+									"key": "dateOfEmployment",
+									"value": "23/3/13",
+									"type": "text"
+								},
+								{
+									"key": "storeId",
+									"value": "{{storeId}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:3000/employees"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete employee",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:3000/employees/{{employeeId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Employee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Pantelis",
+									"type": "text"
+								},
+								{
+									"key": "salary",
+									"value": "35000",
+									"type": "text"
+								},
+								{
+									"key": "dateOfEmployment",
+									"value": "23/3/13",
+									"type": "text"
+								},
+								{
+									"key": "storeId",
+									"value": "{{storeId}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:3000/employees/{{employeeId}}"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
