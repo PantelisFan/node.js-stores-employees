@@ -3,7 +3,6 @@
 var mongoose = require('mongoose'),
   Employees = mongoose.model('Employees');
 
-//       /employees REQUESTS
 
 exports.list_all = function (req, res) {
   let filter = {};
